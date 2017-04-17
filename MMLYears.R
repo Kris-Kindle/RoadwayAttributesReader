@@ -1,0 +1,25 @@
+years <- seq(1996, 2014, 1)
+
+MMLYear <- function(year){
+  year <<- filter(MML, Year == year)
+}
+
+write.csv(MMLyears[1], "1996.csv", row.names = TRUE)
+write.csv(MMLyears[2], "1997.csv", row.names = TRUE)
+write.csv(MMLyears[3], "1998.csv", row.names = TRUE)
+write.csv(MMLyears[4], "1999.csv", row.names = TRUE)
+write.csv(MMLyears[5], "2000.csv", row.names = TRUE)
+write.csv(MMLyears[6], "2001.csv", row.names = TRUE)
+write.csv(MMLyears[7], "2002.csv", row.names = TRUE)
+write.csv(MMLyears[8], "2003.csv", row.names = TRUE)
+write.csv(MMLyears[9], "2004.csv", row.names = TRUE)
+write.csv(MMLyears[10], "2005.csv", row.names = TRUE)
+write.csv(MMLyears[11], "2006.csv", row.names = TRUE)
+write.csv(MMLyears[12], "2007.csv", row.names = TRUE)
+write.csv(MMLyears[13], "2008.csv", row.names = TRUE)
+write.csv(MMLyears[14], "2009.csv", row.names = TRUE)
+write.csv(MMLyears[15], "2010.csv", row.names = TRUE)
+write.csv(MMLyears[16], "2011.csv", row.names = TRUE)
+write.csv(MMLyears[17], "2012.csv", row.names = TRUE)
+write.csv(MMLyears[18], "2013.csv", row.names = TRUE)
+write.csv(MMLyears[19], "2014.csv", row.names = TRUE)
