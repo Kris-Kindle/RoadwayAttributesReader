@@ -5,7 +5,7 @@ createRoadWayFileUrl <- function(fileType, year) {
   
   fileType <- tolower(fileType)
   
-  if (year > 2016) {
+  if (year > 2017) {
     warning("Data for this year is not avialable yet")
   } else if (year >= 2007) {
     further <- paste("policyinformation/statistics/",
@@ -35,7 +35,7 @@ createRoadWayFileUrl <- function(fileType, year) {
   }
   
   if (year == 1996) {
-    fileExtension = ".xlw"
+    fileExtension = "r.xls"
   } else {
     fileExtension = ".xls"
   }
@@ -49,7 +49,7 @@ createRoadWayFileUrl <- function(fileType, year) {
   return(url)
 }
 
-createRoadWayFileUrl("HM20", 2014)
+createRoadWayFileUrl("HM20", 1996)
 
 downloadRoadWayFile <- function(fileType, year) {
   fileUrl <- createRoadWayFileUrl(fileType, year)
@@ -67,8 +67,10 @@ downloadRoadWayFile <- function(fileType, year) {
   } else {
     warning("Please select one of the following file types HM20, HM60, or VM2")
   }
-  
-  if (year == 2016) {
+  if (year >  2016) {
+    file <- readxl::read_excel(tf, sheet =2, skip=13)
+    file <- dplyr::select(file,1,18)
+  } else if (year == 2016) {
     file <- readxl::read_excel(tf, sheet =2, skip=13)
     file <- dplyr::select(file,1,18)
   } else if (year == 2013 & fileType %in% c("hm20", "hm60")) {
@@ -95,6 +97,12 @@ downloadRoadWayFile <- function(fileType, year) {
   return(file)
 }
 
+downloadRoadWayFile("hm20", 1996)
+downloadRoadWayFile("VM2", 1996)
+downloadRoadWayFile("HM60", 1996)
+
+
+
 createRoadWayYear <- function(year) {
   files <- c("VM2", "HM20", "HM60")
   
@@ -105,7 +113,10 @@ createRoadWayYear <- function(year) {
   return(year)
 }
 
-roadwayTotals <- lapply(seq(1997,2016,1), createRoadWayYear)
+roadwayTotals <- createRoadWayYear()
+
+
+roadwayTotals <- lapply(seq(1996,2017,1), createRoadWayYear)
 roadwayTotals <- do.call("rbind", roadwayTotals) %>%
   spread(Measure, Value)
 
